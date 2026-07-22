@@ -1,6 +1,8 @@
-const MovieCard = ({ movie: { title, poster_path, vote_average, original_language, release_date } }) => {
+const MovieCard = ({ movie, onClick }) => {
+	const { title, poster_path, vote_average, original_language, release_date } = movie;
+
 	return (
-		<div className="movie-card">
+		<div className="movie-card" onClick={() => onClick(movie)} role="button" tabIndex={0} onKeyDown={(event) => event.key === 'Enter' && onClick(movie)}>
 			<img src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : '/no-movie.png'} alt={title} />
 			<div className="mt-4">
 				<h3>{title}</h3>

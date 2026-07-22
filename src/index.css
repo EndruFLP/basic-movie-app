@@ -58,22 +58,26 @@
 	}
 
 	.trending {
-		@apply mt-20;
+		@apply mt-12 sm:mt-20;
 
 		& ul {
-			@apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;
+			@apply -mt-6 sm:-mt-10 flex w-full flex-row gap-3 overflow-x-auto sm:gap-5 hide-scrollbar;
+			scroll-snap-type: x mandatory;
 		}
 
 		& ul li {
-			@apply min-w-[230px] flex flex-row items-center;
+			@apply flex shrink-0 snap-start flex-row items-center min-w-[155px] xs:min-w-[175px] sm:min-w-[200px] md:min-w-[230px];
 		}
 
 		& ul li p {
-			@apply fancy-text mt-[22px] text-nowrap;
+			@apply mt-4 text-nowrap sm:mt-[22px];
+			-webkit-text-stroke: 3px rgba(206, 206, 251, 0.5);
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: clamp(72px, 14vw, 190px);
 		}
 
 		& ul li img {
-			@apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
+			@apply rounded-lg object-cover w-[clamp(72px,12vw,127px)] h-[clamp(92px,15vw,163px)] -ml-[clamp(28px,5vw,55px)];
 		}
 	}
 
@@ -102,7 +106,7 @@
 	}
 
 	.movie-card {
-		@apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10;
+		@apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10 transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer;
 
 		& img {
 			@apply rounded-lg h-auto w-full;
@@ -139,6 +143,56 @@
 		& .content .year {
 			@apply text-gray-100 font-medium text-base;
 		}
+	}
+
+	.movie-modal {
+		@apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-5 backdrop-blur-sm;
+	}
+
+	.movie-modal-content {
+		@apply relative flex max-h-[90vh] w-full max-w-3xl flex-col gap-6 overflow-y-auto rounded-2xl bg-dark-100 p-6 shadow-2xl sm:flex-row sm:p-8;
+	}
+
+	.movie-modal-close {
+		@apply absolute top-4 right-4 flex size-9 items-center justify-center rounded-full bg-light-100/10 text-2xl leading-none text-white transition-colors hover:bg-light-100/20;
+	}
+
+	.movie-modal-poster {
+		@apply mx-auto h-auto w-full max-w-[220px] shrink-0 rounded-xl object-cover sm:mx-0;
+	}
+
+	.movie-modal-details {
+		@apply flex flex-col gap-4;
+
+		& h3 {
+			@apply pr-10 text-2xl font-bold text-white;
+		}
+
+		& .content {
+			@apply flex flex-row flex-wrap items-center gap-2;
+		}
+
+		& .rating {
+			@apply flex flex-row items-center gap-1;
+		}
+
+		& .rating img {
+			@apply size-4 object-contain;
+		}
+
+		& .rating p {
+			@apply text-base font-bold text-white;
+		}
+
+		& .content span,
+		& .lang,
+		& .year {
+			@apply text-sm font-medium text-gray-100 capitalize;
+		}
+	}
+
+	.movie-modal-overview {
+		@apply text-base leading-relaxed text-light-200;
 	}
 }
 
